@@ -5,6 +5,7 @@ const data = JSON.parse(readdata)
 const readdata2 = fs.readFileSync("student.txt", {encoding : "utf-8" });
 const data2 = JSON.parse(readdata2)
 const server = http.createServer((req, resp)=>{
+  try {
   const urlsplit = req.url.split("/") 
   if(req.url.includes("teacher")){   
     if( typeof+urlsplit[urlsplit.length-1] == "number" && (+urlsplit[urlsplit.length-1]) && data.length >= (+urlsplit[urlsplit.length-1])){
@@ -35,8 +36,13 @@ const server = http.createServer((req, resp)=>{
   resp.write("internal server error")
   }
   resp.end()
+} catch (error) {
+    console.log(error);
+}
 })
+
+
 server.listen(8001, "localhost",()=>{
-    console.log("server will be start index2")
+    console.log("server will be start")
 });
 

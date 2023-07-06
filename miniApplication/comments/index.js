@@ -1,54 +1,89 @@
-const fs = require("fs")
+/** Imported Required Modules */
+const fs = require("fs");
 const http = require("http");
 
-const readdata = fs.readFileSync("teacher.txt", {encoding : "utf-8" });
-const cleanedString = readdata.replace(/\s/g, '');
-const Teacherdata = JSON.parse(cleanedString)
+//Constants Declaration
+const TEACHER = "teacher";
+const STUDENT = "student";
+const PORT = 8001;
+const IP = "localhost";
+const SUCCESS = 200;
+const NOT_FOUND = 404;
+const NOT_FOUND_MESSAGE = "NOT FOUND";
 
-// const readdata2 = fs.readFileSync("student.txt", {encoding : "utf-8" });
-// const cleanedString2 = readdata2.replace(/\s/g, '');
-// const studentData = JSON.parse(cleanedString2)
+//Reading File Data
+const teachersData = readTeachersData();
+const studentsData = readStudentsData();
 
-const server = http.createServer((req, resp)=>{
-      console.log(req.url);
-      
-        if(req.url.includes("teacher")){
-          const urlSplit = req.url.split("/");
-          let teachers;
-          const lengthOfData = Teacherdata.length;
-              for(let i = 0; i < lengthOfData; i++){
-                  if(urlSplit[urlSplit.length-1] == i){
-                    resp.writeHead(200)
-                    teachers= JSON.stringify(Teacherdata[i])
-                  break;
-                }
-      }
-      if(teachers){
-        resp.writeHead(200) 
-        resp.end(teachers)
-      }else{
-        resp.writeHead(404);
-        resp.end();
-      }
-      resp.writeHead(200)
-      resp.end(JSON.stringify(Teacherdata)); 
+//Creating Server
+const server = http.createServer((req, resp) => {
+  const urls = req.url.split("/");
+  if (req.url.includes(TEACHER)) {
+    handleTeacherRequests(urls, resp);
+  } else if (req.url.includes(STUDENT)) {
+    handleStudentsRequests(urls, resp);
+  } else {
+    resp.writeHead(NOT_FOUND);
+    resp.write(NOT_FOUND_MESSAGE);
+  }
+  resp.end();
+});
+server.listen(PORT, IP, () => {
+  console.log("Server started");
+});
+
+
+
+
+function handleStudentsRequests(urls, resp) {
+  if (!isNaN(urls[urls.length - 1]) ) {
+    let students = studentsData.filter(
+      (student) => student.id == urls[urls.length - 1]
+    );
+    if(JSON.stringify(students)  === JSON.stringify([]) ){
+      resp.writeHead(NOT_FOUND);
+      resp.write(`${STUDENT} ${NOT_FOUND_MESSAGE}` );
     }
+    resp.writeHead(SUCCESS);
+    resp.write(JSON.stringify(students));
+  } else if (urls[urls.length - 1] === STUDENT) {
+    resp.writeHead(SUCCESS);
+    resp.write(JSON.stringify(studentsData));
+  } else {
+    resp.writeHead(NOT_FOUND);
+    resp.write(`${STUDENT} ${NOT_FOUND_MESSAGE}`);
+  }
+}
 
-    
-//   else if(req.url.includes("student")){
-//     const urlSplit = req.url.split("/");
-//     const lengthOfData = studentData.length;
-//         for(let i = 0; i < lengthOfData; i++){
-//             if(urlSplit[urlSplit.length-1] == i){
-//             resp.end(JSON.stringify(studentData[i]));
-//             break;
-//           }
-// }
-// resp.writeHead(200)
-// resp.end(JSON.stringify(studentData)); 
-// }
-});
-server.listen(8004, "localhost",()=>{
-    console.log("Success")
-});
+function handleTeacherRequests(urls, resp) {
+  if (!isNaN(urls[urls.length - 1])) {
+    let teachers = teachersData.filter(
+      (teacher) => teacher.id == urls[urls.length - 1]
+    );
+    if(JSON.stringify(teachers)  === JSON.stringify([]) ){
+      resp.writeHead(NOT_FOUND);
+      resp.write(`${TEACHER} ${NOT_FOUND_MESSAGE}` );
+    }
+    resp.writeHead(SUCCESS);
+    resp.write(JSON.stringify(teachers));
+  } else if (urls[urls.length - 1] === TEACHER) {
+    resp.writeHead(SUCCESS);
+    resp.write(JSON.stringify(teachersData));
+  } else {
+    resp.writeHead(NOT_FOUND);
+    resp.write(`${TEACHER} ${NOT_FOUND_MESSAGE}`);
+  }
+}
+
+function readTeachersData() {
+  return JSON.parse(
+    fs.readFileSync("teacher.txt", {
+      encoding: "utf-8",
+    })
+  );
+}
+
+function readStudentsData() {
+  return JSON.parse(fs.readFileSync("student.txt", { encoding: "utf-8" }));
+}
 

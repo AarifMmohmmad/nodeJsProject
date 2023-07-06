@@ -1,0 +1,8 @@
+[
+    {"id" : 1,"name" : "Aarif khan", "mobile" : 3432243423, "address" : "merta"}, 
+    {"id" : 2,"name" : "sher khan", "mobile" : 4545443443, "address" : "karakwal"},
+    {"id" : 3,"name" : "vakil khan", "mobile" : 3432243423, "address" : "merta"}, 
+    {"id" : 4,"name" : "khalil khilzi", "mobile" : 4545443443, "address" : "karakwal"},
+    {"id" : 5,"name" : "majit joya ", "mobile" : 3432243423, "address" : "merta"}, 
+    {"id" : 6,"name" : "rustam ali ", "mobile" : 4545443443, "address" : "karakwal"} 
+]

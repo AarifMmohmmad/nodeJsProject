@@ -1,11 +1,7 @@
-let prom = fetch("http://localhost:8900/api/v1/student", { mode: "no-cors" });
-prom
-  .then(function (res) {
-    return res.json();
-  })
-  .then(function (res) {
-    console.log(res);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+// let s = ["1","2","3","4","5"]
+// t = s.find((k)=>k==="10")
+
+// console.log(t);
+
+arrr = []
+console.log(  JSON.stringify(arrr) ===  JSON.stringify([]) );

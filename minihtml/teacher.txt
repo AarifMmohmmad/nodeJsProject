@@ -1,0 +1,8 @@
+[
+    {"id" : 1,"name" : "sher khan sir", "mobile" : 3432243423, "address" : "merta" , "hiii" : "hiii"}, 
+    {"id" : 2,"name" : "Aarif", "mobile" : 4545443443, "address" : "karakwal"},
+    {"id" : 3,"name" : "vakil sir", "mobile" : 3432243423, "address" : "merta"}, 
+    {"id" : 4,"name" : "khali  sir", "mobile" : 4545443443, "address" : "karakwal"},
+    {"id" : 5,"name" : "IAS", "mobile" : 3432243423, "address" : "merta"}, 
+    {"id" : 6,"name" : "IPS", "mobile" : 4545443443, "address" : "karakwal"} 
+]
