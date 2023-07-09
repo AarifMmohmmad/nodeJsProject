@@ -1,0 +1,19 @@
+The req.on is a method in Node.js used to listen for events on a request object. In the context of 
+Node.js web servers, req refers to the incoming HTTP request object.
+req.on(eventName ,eventHandler )
+
+eventName: A string representing the name of the event you want to listen for. Common events 
+include "data", "end", "error", etc.
+eventHandler: The function that will be called when the specified event occurs. This function is 
+commonly referred to as an event handler or callback function. It usually takes parameters 
+specific to the event being handled.
+
+
+
+
+
+
+req.on()   - method kbhi bhi function nhi leta he yhe ak function handler use krta he 
+    
+
+--- hmesh colser function ne globely bnay 
