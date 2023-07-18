@@ -1,1 +1,0 @@
-[{"id":1,"name":"aarifkhan","email":"aarif@gmail.com","mobile":"6475337519","batch":"nodejs"}]
