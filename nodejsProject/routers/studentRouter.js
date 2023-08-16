@@ -1,6 +1,6 @@
 const express = require("express");
 const controller = require("../controllers/studentControllers.js");
-const authentication = require("../middleware/auth.js");
+const authentication = require("../middleware/authentication.js");
 const studentRouter = express.Router();
 
 studentRouter

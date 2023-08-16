@@ -28,28 +28,3 @@ const authentication = async (req, res, next) => {
   }
 };
 module.exports = authentication;
-
-// try {
-//     let id;
-//     if (req.body._id) {
-//       id = req.body._id;
-//       checkUser = await Student.findOne({ _id: _id });
-//     } else {
-//       id = req.params.id;
-//       checkUser = await Student.findOne({ _id: id });
-//     }
-//     if (checkUser) {
-//       next();
-//     } else {
-//       res.send({
-//         status: "failer",
-//         message: "please give a vaild id",
-//         data: null,
-//       });
-//     }
-//   } catch (error) {
-//     res.send({
-//       status: "failer",
-//       message: `something wromg ${error.message}`,
-//     });
-//   }
