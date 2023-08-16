@@ -1,4 +1,4 @@
-const Student = require("../dataBase/models/userModels.js");
+const Student = require("../dataBase/models/studentModels.js");
 
 const creat = async (req, res) => {
   try {
@@ -31,8 +31,6 @@ let creatBulk = async (req, res) => {
     } else {
       const student = await new Student(user);
       await student.save();
-
-      // await Student.create(user);
       if (student) {
         await data.push({
           status: "success",
@@ -63,13 +61,12 @@ const getAlldata = async (req, res) => {
   }
 };
 const userfind = async (req, res) => {
-  id = req.params.id;
-  console.log(id);
+  let id = req.params.id;
   try {
     data = await Student.findOne({ _id: id });
     res.send({
       status: "success",
-      massge: "user data ",
+      massge: "student data ",
       data: data,
     });
   } catch (error) {
@@ -86,7 +83,6 @@ const update = async (req, res) => {
     data = await Student.findByIdAndUpdate({ _id: req.body.id }, req.body);
     // data = await Student.updateOne({ email: req.body.email }, req.body);
     // data = await Student.findOneAndUpdate({ email: req.body.email }, req.body);
-
     res.send({
       status: "success",
       massge: "student succesfully  update",
@@ -121,12 +117,11 @@ const delet = async (req, res) => {
     });
   }
 };
-
+/////// this is not good working doubt
 const deletBulk = async (req, res) => {
   try {
     data = await Student.deleteMany({ name: req.body.name }); // jo bhi delet krna he req.body me uska nam deve
     // data = await Student.findByIdAndDelete({ _id: req.body.id });
-
     res.send({
       status: "success",
       massge: "student succesfully  delet",

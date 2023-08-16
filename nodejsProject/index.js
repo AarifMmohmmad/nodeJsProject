@@ -1,7 +1,7 @@
 const express = require("express");
 const environment = require("./config/env.js");
 const mongodbConnection = require("./dataBase/connection.js");
-const studentrouter = require("./routers/userRouter.js");
+const studentrouter = require("./routers/studentRouter.js");
 
 const app = express();
 
