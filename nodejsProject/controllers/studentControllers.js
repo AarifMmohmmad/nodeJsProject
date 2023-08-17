@@ -19,25 +19,47 @@ const creat = async (req, res) => {
   }
 };
 
+// let creatBulk = async (req, res) => {
+//   users = req.body;
+//   const data = [];
+//   for (let user of users) {
+//     if (await Student.findOne({ email: user.email })) {
+//       await data.push({
+//         status: "fail",
+//         massge: "valid imformation",
+//       });
+//     } else {
+//       const student = await new Student(user);
+//       await student.save();
+//       if (student) {
+//         await data.push({
+//           status: "success",
+//           massge: "student success fully creat",
+//           data: user,
+//         });
+//       }
+//     }
+//   }
+//   res.send(data);
+// };
+
 let creatBulk = async (req, res) => {
   users = req.body;
   const data = [];
   for (let user of users) {
-    if (await Student.findOne({ email: user.email })) {
-      await data.push({
-        status: "fail",
-        massge: "valid imformation",
-      });
-    } else {
+    try {
       const student = await new Student(user);
       await student.save();
-      if (student) {
-        await data.push({
-          status: "success",
-          massge: "student success fully creat",
-          data: user,
-        });
-      }
+      data.push({
+        status: "success",
+        massge: "student success fully creat",
+        data: user,
+      });
+    } catch (error) {
+      data.push({
+        status: "fail",
+        massge: `error ${error.message}`,
+      });
     }
   }
   res.send(data);

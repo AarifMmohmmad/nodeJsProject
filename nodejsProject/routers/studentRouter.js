@@ -13,7 +13,7 @@ studentRouter
 studentRouter.route("/:id").get(authentication, controller.userfind);
 
 studentRouter
-  .route("/bluk")
+  .route("/bulk")
   .post(controller.creatBulk)
   .delete(controller.deletBulk);
 
